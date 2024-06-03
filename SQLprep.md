@@ -176,6 +176,72 @@ By setting the isolation level to SERIALIZABLE, we ensure that no other transact
 
 -  Durability: The transfer of money between two accounts should be durable, meaning that once the transaction is committed, the changes should persist even in the event of a system failure. This is typically achieved through mechanisms like write-ahead logging and database backups. Once the COMMIT statement is executed, all changes are saved permanently in the database. Even if the system crashes immediately after the commit, the changes will persist.
 
+Q: What are Database isolation levels in SQL?
+
+A: Database isolation levels define the degree to which one transaction must be isolated from the effects of other transactions. There are four standard isolation levels in SQL:
+
+1. READ UNCOMMITTED: This is the lowest isolation level where transactions can read uncommitted changes made by other transactions. This level allows dirty reads, non-repeatable reads, and phantom reads.
+```sql
+-- Transaction 1
+START TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+
+-- Transaction 2
+START TRANSACTION;
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT * FROM accounts WHERE account_id = 1;  -- Can see the uncommitted update by Transaction 1
+```
+
+2. READ COMMITTED: This isolation level ensures that a transaction can only read committed data from other transactions. It prevents dirty reads but allows non-repeatable reads and phantom reads.
+```sql
+-- Transaction 1
+START TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+COMMIT;
+
+-- Transaction 2
+START TRANSACTION;
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the uncommitted update by Transaction 1
+```
+
+3. REPEATABLE READ: This isolation level ensures that a transaction can read the same data multiple times without changes from other transactions. It prevents dirty reads and non-repeatable reads but allows phantom reads.
+```sql
+-- Transaction 1
+START TRANSACTION;
+SELECT * FROM accounts WHERE account_id = 1;
+
+-- Transaction 2
+START TRANSACTION;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
+COMMIT;
+
+-- Transaction 1
+SELECT * FROM accounts WHERE account_id = 1;  -- Can see the new row inserted by Transaction 2
+```
+
+4. SERIALIZABLE: This is the highest isolation level that ensures complete isolation between transactions. It prevents dirty reads, non-repeatable reads, and phantom reads by locking the data being read by a transaction until the transaction is completed.
+```sql
+-- Transaction 1
+START TRANSACTION;
+SELECT * FROM accounts WHERE account_id = 1;
+
+-- Transaction 2
+START TRANSACTION;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
+COMMIT;
+
+-- Transaction 1
+SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the new row inserted by Transaction 2
+```
+Practical Usage
+- Read Uncommitted: Used when performance is critical, and the application can tolerate dirty reads, such as in logging or monitoring systems.
+- Read Committed: Commonly used as the default isolation level in many databases, balancing performance and data consistency.
+- Repeatable Read: Used when applications require consistent reads within a transaction but can tolerate phantom reads.
+- Serializable: Used when the highest level of data integrity is required, typically in financial applications or systems requiring strict consistency.
+
 Q: Order of execution of SQL queries?
 
 A: The order of execution of SQL queries is as follows:
@@ -290,3 +356,97 @@ ORDER BY column1;
 Q: What is a LOOP JOIN?
 
 A: A LOOP JOIN is a join operation that compares each row from the first table with each row from the second table to find matching rows. LOOP JOINS are the slowest of the three join types. LOOP JOINS are used when the tables are small and fit in memory. LOOP JOINS are used when the tables are not sorted on the join key.
+
+Q: What is indexing in SQL?
+
+A: Indexing in SQL is a technique used to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by creating an index on a table. An index is a data structure that stores the values of one or more columns in a table in a sorted order, allowing the database to quickly locate the rows that match a specified condition. Indexing can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. 
+
+Q: What are the different types of indexes in SQL?
+
+A: There are several types of indexes in SQL:
+
+1. Single-column index: An index created on a single column in a table.
+2. Composite index: An index created on multiple columns in a table.
+3. Unique index: An index that enforces the uniqueness of values in one or more columns.
+4. Clustered index: An index that stores the data rows in the table in the same order as the index.
+5. Non-clustered index: An index that stores the data rows in the table in a separate location from the index.
+6. Bitmap index: An index that stores the values of multiple columns in a single bitmap.
+7. Function-based index: An index that is created based on the result of a function applied to one or more columns.
+8. Spatial index: An index that is created on spatial data types to optimize spatial queries.
+
+```sql
+# Syntax for creating indexes in SQL
+
+# Single-column index
+CREATE INDEX index_name ON table_name (column1);
+
+# Composite index
+CREATE INDEX index_name ON table_name (column1, column2);
+
+# Unique index
+CREATE UNIQUE INDEX index_name ON table_name (column1, column2);
+
+# Clustered index
+CREATE CLUSTERED INDEX index_name ON table_name (column1, column2);
+
+# Non-clustered index
+CREATE NONCLUSTERED INDEX index_name ON table_name (column1, column2);
+
+# Bitmap index
+CREATE BITMAP INDEX index_name ON table_name (column1, column2);
+
+# Function-based index
+CREATE INDEX index_name ON table_name (UPPER(column1));
+
+# Spatial index
+CREATE SPATIAL INDEX index_name ON table_name (column1);
+
+```
+
+Q: Database Denormalization and its advantages?
+
+A: Database denormalization is the process of optimizing a database by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database. Denormalization can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. It can also reduce the complexity of the database schema and improve the readability of the SQL queries.
+
+Advantages of database denormalization:
+1. Improved performance: Denormalization can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database.
+2. Reduced complexity: Denormalization can reduce the complexity of the database schema by adding redundant data to one or more tables.
+3. Improved readability: Denormalization can improve the readability of the SQL queries by reducing the number of joins required to retrieve data from the database.
+
+```sql
+-- Normalized
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE
+);
+
+CREATE TABLE order_items (
+    item_id INT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10, 2)
+);
+
+-- Denormalized
+CREATE TABLE daily_sales_summary (
+    sales_date DATE PRIMARY KEY,
+    total_sales DECIMAL(10, 2),
+    total_orders INT
+);
+
+-- Denormalized Cache for faster retrieval
+
+CREATE TABLE product_cache (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_name VARCHAR(100),
+    inventory_count INT,
+    price DECIMAL(10, 2)
+);
+```
+Disadvantages of database denormalization:
+1. Increased storage space: Denormalization can increase the storage space required to store redundant data in one or more tables.
+2. Data redundancy: Denormalization can introduce data redundancy by storing the same data in multiple tables.
+3. Data inconsistency: Denormalization can lead to data inconsistency by storing redundant data in one or more tables.
+4. Complicated write operations: Denormalization can complicate write operations by requiring updates to redundant data in one or more tables.
