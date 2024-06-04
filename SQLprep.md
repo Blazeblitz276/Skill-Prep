@@ -1,14 +1,10 @@
 # SQL prep
 
-Q: What is SQL JOINS?
-
-A: The SQL JOIN component joins rows from one or more tables in a relational database. Create sets that can be stored in tabular form or used routinely. JOIN is to combine columns from one table or multiple tables using the same value.
-
 Q: Types of Queries in SQL?
 
 A: There are 5 types of queries in SQL:
 
-Data Definition Language (DDL) - `CREATE, ALTER, DROP, TRUNCATE, RENAME, COMMENT`, etc.
+Data Definition Language (DDL) - `CREATE, ALTER, DROP, TRUNCATE, RENAME, COMMENT, EXPLAIN(for explaining query excution status)`, etc.
 
 Data Manipulation Language (DML) -`SELECT, INSERT, UPDATE, DELETE, MERGE, CALL, EXPLAIN PLAN, LOCK TABLE`, etc.
 
@@ -30,6 +26,7 @@ DROP [object type] [object name]
 
 ALTER [object type] [object name] [action]
 eg: ALTER TABLE table_name ADD column_name datatype
+
 ```
 
 Data Manipulation operations : CRUD - create, read, update and delete data operations in a DBMS. These are done using `INSERT, SELECT, UPDATE, DELETE` operations.
@@ -52,7 +49,7 @@ WHERE employee_id = 1;
 
 Data Control operations: These operations are used to control the access to the data in the database. These are done using GRANT and REVOKE operations.
 
-`GRANT` privilidges include; SELECT, INSERT, UPDATE, DELETE, REFERENCES, ALTER, INDEX, CREATE, DROP, GRANT OPTION, ALL PRIVILEGES.
+`GRANT` privilidges include; `SELECT, INSERT, UPDATE, DELETE, REFERENCES, ALTER, INDEX, CREATE, DROP, GRANT OPTION, ALL PRIVILEGES`.
 ```sql
 GRANT SELECT, INSERT, UPDATE, DELETE ON employees TO  'john'@'localhost';
 
@@ -174,7 +171,7 @@ END IF;
 ```
 By setting the isolation level to SERIALIZABLE, we ensure that no other transactions can interfere with this transaction.
 
--  Durability: The transfer of money between two accounts should be durable, meaning that once the transaction is committed, the changes should persist even in the event of a system failure. This is typically achieved through mechanisms like write-ahead logging and database backups. Once the COMMIT statement is executed, all changes are saved permanently in the database. Even if the system crashes immediately after the commit, the changes will persist.
+-  Durability: The transfer of money between two accounts should be durable, meaning that once the transaction is committed, the changes should persist even in the event of a system failure. This is typically achieved through mechanisms like write-ahead logging and database backups. Once the `COMMIT` statement is executed, all changes are saved permanently in the database. Even if the system crashes immediately after the commit, the changes will persist.
 
 Q: What are Database isolation levels in SQL?
 
@@ -246,25 +243,25 @@ Q: Order of execution of SQL queries?
 
 A: The order of execution of SQL queries is as follows:
 
-1. FROM: The FROM clause specifies the tables from which the data will be retrieved.
-2. WHERE: The WHERE clause filters the rows based on a specified condition.
-3. GROUP BY: The GROUP BY clause groups the rows that have the same values into summary rows.
-4. HAVING: The HAVING clause filters the groups based on a specified condition.
-5. SELECT: The SELECT clause selects the columns that will be included in the result set.
-6. ORDER BY: The ORDER BY clause sorts the result set by one or more columns.
-7. LIMIT: The LIMIT clause limits the number of rows returned by the query.
-8. OFFSET: The OFFSET clause specifies the number of rows to skip before starting to return rows.
-9. FETCH: The FETCH clause is used to retrieve a specified number of rows from a result set.
-10. UNION: The UNION clause combines the results of two or more SELECT statements into a single result set.
-11. JOIN: The JOIN clause combines rows from two or more tables based on a related column between them.
-12. SUBQUERY: The SUBQUERY clause is used to nest a query within another query.
-13. WINDOW FUNCTION: The WINDOW FUNCTION clause is used to perform calculations across a set of rows related to the current row.
-14. COMMON TABLE EXPRESSION: The COMMON TABLE EXPRESSION clause is used to define a temporary result set that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement.
-15. TRIGGER: The TRIGGER clause is used to define a set of actions that are automatically performed when a specified event occurs.
-16. INDEX: The INDEX clause is used to create an index on a table to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
-17. VIEW: The VIEW clause is used to create a virtual table based on the result set of a SELECT statement.
-18. STORED PROCEDURE: The STORED PROCEDURE clause is used to define a set of SQL statements that can be executed as a single unit.
-19. FUNCTION: The FUNCTION clause is used to define a set of SQL statements that can be executed as a single unit and return a value.
+1. `FROM`: The FROM clause specifies the tables from which the data will be retrieved.
+2. `WHERE`: The WHERE clause filters the rows based on a specified condition.
+3. `GROUP` BY: The GROUP BY clause groups the rows that have the same values into summary rows.
+4. `HAVING`: The HAVING clause filters the groups based on a specified condition.
+5. `SELECT`: The SELECT clause selects the columns that will be included in the result set.
+6. `ORDER` BY: The ORDER BY clause sorts the result set by one or more columns.
+7. `LIMIT`: The LIMIT clause limits the number of rows returned by the query.
+8. `OFFSET`: The OFFSET clause specifies the number of rows to skip before starting to return rows.
+9. `FETCH`: The FETCH clause is used to retrieve a specified number of rows from a result set.
+10. `UNION`: The UNION clause combines the results of two or more SELECT statements into a single result set.
+11. `JOIN`: The JOIN clause combines rows from two or more tables based on a related column between them.
+12. `SUBQUERY`: The SUBQUERY clause is used to nest a query within another query.
+13. `WINDOW` FUNCTION: The WINDOW FUNCTION clause is used to perform calculations across a set of rows related to the current row.
+14. `COMMON` TABLE EXPRESSION: The COMMON TABLE EXPRESSION clause is used to define a temporary result set that can be referenced within a `SELECT, INSERT, UPDATE`, or `DELETE` statement.
+15. `TRIGGER`: The TRIGGER clause is used to define a set of actions that are automatically performed when a specified event occurs.
+16. `INDEX`: The INDEX clause is used to create an index on a table to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
+17. `VIEW`: The VIEW clause is used to create a virtual table based on the result set of a SELECT statement.
+18. `STORED` PROCEDURE: The STORED PROCEDURE clause is used to define a set of SQL statements that can be executed as a single unit.
+19. `FUNCTION`: The FUNCTION clause is used to define a set of SQL statements that can be executed as a single unit and return a value.
 
 
 
@@ -272,12 +269,12 @@ Q: What are the different types of SQL JOINS?
 
 A: There are 6 types of SQL JOINS:
 
-1. INNER JOIN: Returns records that have matching values in both tables.
-2. LEFT JOIN: Returns all records from the left table and the matched records from the right table.
-3. RIGHT JOIN: Returns all records from the right table and the matched records from the left table.
-4. FULL JOIN: Returns all records when there is a match in either left or right table.
-5. SELF JOIN: A self join is a regular join, but the table is joined with itself. This is useful for comparing values in a column with other values in the same column in the same table. 
-6. CROSS JOIN: Returns the Cartesian product of the two tables. That is, it returns all possible combinations of rows from the two tables. It is useful when you want to combine every row from one table with every row from another table.
+1. `INNER JOIN`: Returns records that have matching values in both tables.
+2. `LEFT JOIN`: Returns all records from the left table and the matched records from the right table.
+3. `RIGHT JOIN`: Returns all records from the right table and the matched records from the left table.
+4. `FULL JOIN`: Returns all records when there is a match in either left or right table.
+5. `SELF JOIN`: A self join is a regular join, but the table is joined with itself. This is useful for comparing values in a column with other values in the same column in the same table. 
+6. `CROSS JOIN`: Returns the Cartesian product of the two tables. That is, it returns all possible combinations of rows from the two tables. It is useful when you want to combine every row from one table with every row from another table.
 
 Q: What is NATURAL JOIN?
 
@@ -315,19 +312,19 @@ JOIN table2 ON table1.column1 = table2.column1;
 
 Q: How are JOINS different from the UNION clause?
 
-A: JOINS and UNION are used to combine data from multiple tables, but they are used in different ways. JOINS are used to combine rows from two or more tables based on a related column between them, while UNION is used to combine the results of two or more SELECT statements into a single result set. JOINS are used to retrieve data from multiple tables in a single query, while UNION is used to combine the results of multiple queries into a single result set. JOINS combine rows horizontally, while UNION combines rows vertically.
+A: `JOIN` and `UNION` are used to combine data from multiple tables, but they are used in different ways. JOINS are used to combine rows from two or more tables based on a related column between them, while UNION is used to combine the results of two or more SELECT statements into a single result set. JOINS are used to retrieve data from multiple tables in a single query, while UNION is used to combine the results of multiple queries into a single result set. JOINS combine rows horizontally, while UNION combines rows vertically.
 
-Q: What is the difference between UNION and UNION ALL?
+Q: What is the difference between `UNION` and `UNION ALL`?
 
-A: UNION and UNION ALL are used to combine the results of two or more SELECT statements into a single result set, but they are used in different ways. UNION removes duplicate rows from the result set, while UNION ALL does not. This means that UNION returns only distinct rows, while UNION ALL returns all rows, including duplicates.
+A: `UNION` and `UNION ALL` are used to combine the results of two or more SELECT statements into a single result set, but they are used in different ways. `UNION` removes duplicate rows from the result set, while `UNION ALL` does not. This means that `UNION` returns only distinct rows, while `UNION ALL` returns all rows, including duplicates.
 
-Q: What is the difference between WHERE and HAVING clause?
+Q: What is the difference between `WHERE` and `HAVING` clause?
 
-A: The WHERE clause is used to filter rows based on a specified condition, while the HAVING clause is used to filter groups based on a specified condition. The WHERE clause is used with the SELECT, INSERT, UPDATE, and DELETE statements to filter rows based on a specified condition. The HAVING clause is used with the SELECT statement to filter groups based on a specified condition. The WHERE clause is used before the GROUP BY clause, while the HAVING clause is used after the GROUP BY clause.
+A: The `WHERE` clause is used to filter rows based on a specified condition, while the `HAVING` clause is used to filter groups based on a specified condition. The WHERE clause is used with the `SELECT, INSERT, UPDATE, and DELETE` statements to filter rows based on a specified condition. The `HAVING` clause is used with the SELECT statement to filter groups based on a specified condition. The `WHERE` clause is used before the `GROUP BY` clause, while the `HAVING` clause is used after the `GROUP BY` clause.
 
-Q: What is the difference between GROUP BY and ORDER BY clause?
+Q: What is the difference between `GROUP BY` and `ORDER BY` clause?
 
-A: The GROUP BY clause is used to group rows that have the same values into summary rows, while the ORDER BY clause is used to sort the result set by one or more columns. The GROUP BY clause is used with the SELECT statement to group rows that have the same values into summary rows. The ORDER BY clause is used with the SELECT statement to sort the result set by one or more columns. The GROUP BY clause is used before the ORDER BY clause.
+A: The `GROUP BY` clause is used to group rows that have the same values into summary rows, while the `ORDER BY` clause is used to sort the result set by one or more columns. The `GROUP BY` clause is used with the SELECT statement to group rows that have the same values into summary rows. The `ORDER BY` clause is used with the SELECT statement to sort the result set by one or more columns. The `GROUP BY` clause is used before the `ORDER BY` clause.
 
 Q: Is it required that the JOIN condition be based on equality?
 
@@ -340,11 +337,11 @@ JOIN table2 ON table1.column1 > table2.column1;
 
 Q: What is a HASH JOIN?
 
-A: A HASH JOIN requires two inputs, an INNER table, and an OUTER table. HASH JOINS involve using a HASH table to identify matching rows between two tables. HASH JOINS are an option when other joins are not recommended. When joining large data sets that are unsorted or non-indexed HASH JOINS are better. HASH JOINS are faster than MERGE JOINS and LOOP JOINS. HASH JOINS are used when the tables are large and do not fit in memory. 
+A: A `HASH JOIN` requires two inputs, an INNER table, and an OUTER table. `HASH JOINS` involve using a HASH table to identify matching rows between two tables. `HASH JOINS` are an option when other joins are not recommended. When joining large data sets that are unsorted or non-indexed `HASH JOINS` are better. `HASH JOINS` are faster than MERGE JOINS and LOOP JOINS. `HASH JOINS` are used when the tables are large and do not fit in memory. 
 
 Q: What is a MERGE JOIN?
 
-A: A MERGE JOIN is a join operation that combines two sorted data sets into a single result set. MERGE JOINS are used when the tables are already sorted on the join key. MERGE JOINS are faster than LOOP JOINS but slower than HASH JOINS. MERGE JOINS are used when the tables are small and fit in memory. 
+A: A MERGE JOIN is a join operation that combines two sorted data sets into a single result set. MERGE JOINS are used when the tables are already sorted on the join key. MERGE JOINS are faster than LOOP JOINS but slower than `HASH JOINS`. MERGE JOINS are used when the tables are small and fit in memory. 
 
 ```sql
 SELECT column1, column2
@@ -450,3 +447,353 @@ Disadvantages of database denormalization:
 2. Data redundancy: Denormalization can introduce data redundancy by storing the same data in multiple tables.
 3. Data inconsistency: Denormalization can lead to data inconsistency by storing redundant data in one or more tables.
 4. Complicated write operations: Denormalization can complicate write operations by requiring updates to redundant data in one or more tables.
+
+
+Q: What are stored procedures in SQL?
+
+A: Stored procedures in SQL are a set of SQL statements that are stored in the database and can be executed by calling the procedure name. Stored procedures can accept input parameters, return output parameters, and perform complex operations that involve multiple SQL statements. Stored procedures are used to encapsulate business logic, improve performance, and enhance security by preventing SQL injection attacks.
+
+```sql
+-- Syntax for creating a stored procedure in SQL
+
+CREATE PROCEDURE procedure_name
+    [ (parameter1 datatype, parameter2 datatype, ...) ]
+AS
+BEGIN
+    SQL statements
+END;
+```
+```sql
+
+DELIMITER //
+
+CREATE PROCEDURE GetEmployeeDetails(IN emp_id INT)
+BEGIN
+    SELECT * FROM employees WHERE employee_id = emp_id;
+END //
+
+DELIMITER ;
+```
+
+```sql
+-- Calling a stored procedure in SQL
+
+CALL procedure_name(parameter1, parameter2, ...);
+```
+
+```sql
+-- Example of calling a stored procedure in SQL
+
+CALL GetEmployeeDetails(1);
+```
+
+Q: What are triggers in SQL?
+
+A: Triggers in SQL are special types of stored procedures that are automatically executed in response to certain events on a table. Triggers can be executed before or after `INSERT, UPDATE, DELETE`, and MERGE statements on a table. Triggers are used to enforce business rules, maintain data integrity, and perform complex operations that involve multiple SQL statements.
+
+```sql
+-- Syntax for creating a trigger in SQL
+
+CREATE TRIGGER trigger_name
+BEFORE | AFTER INSERT | UPDATE | DELETE | MERGE
+ON table_name
+FOR EACH ROW
+BEGIN
+    SQL statements
+END;
+```
+
+```sql
+-- Example of a trigger in SQL
+
+DELIMITER //
+
+CREATE TRIGGER UpdateEmployeeSalary
+
+BEFORE UPDATE OF salary ON employees
+
+FOR EACH ROW
+BEGIN
+    IF NEW.salary > OLD.salary THEN
+        INSERT INTO salary_history (employee_id, old_salary, new_salary, change_date)
+        VALUES (NEW.employee_id, OLD.salary, NEW.salary, NOW());
+    END IF;
+END //
+
+DELIMITER ;
+```
+
+Q: What is a view in SQL?
+
+A: A view in SQL is a virtual table that is based on the result set of a SELECT statement. Views are used to simplify complex queries, hide the complexity of the database schema, and provide a layer of security by restricting access to certain columns or rows. Views can be used to retrieve data from multiple tables in a single query, and they can be updated like regular tables.
+
+```sql
+-- Syntax for creating a view in SQL
+
+CREATE VIEW view_name AS
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+```
+
+```sql
+-- Example of a view in SQL
+
+CREATE VIEW employee_details AS
+SELECT employee_id, first_name, last_name, email
+FROM employees
+WHERE department_id = 10;
+```
+
+Q: What is a Common Table Expression (CTE) in SQL?
+
+A: A Common Table Expression (CTE) in SQL is a temporary result set that can be referenced within a `SELECT, INSERT, UPDATE`, or `DELETE` statement. CTEs are used to simplify complex queries, improve readability, and provide a layer of abstraction by breaking down a query into smaller, more manageable parts. CTEs are defined using the WITH clause and can be referenced multiple times within a query. They can only be used within the scope of the query in which they are defined.
+
+```sql
+-- Syntax for creating a CTE in SQL
+
+WITH cte_name AS (
+    SELECT column1, column2
+    FROM table_name
+    WHERE condition
+)
+SELECT column1, column2
+FROM cte_name;
+```
+
+```sql
+-- Example of a CTE in SQL
+
+WITH employee_details AS (
+    SELECT employee_id, first_name, last_name, email
+    FROM employees
+    WHERE department_id = 10
+)
+
+
+SELECT employee_id, first_name, last_name, email
+FROM employee_details;
+```
+
+Q: How to create functions in SQL?
+
+A: Functions in SQL are a set of SQL statements that can accept input parameters, perform calculations, and return a single value. Functions can be used to encapsulate business logic, improve performance, and enhance security by preventing SQL injection attacks. There are two types of functions in SQL: scalar functions and table-valued functions.
+
+```sql
+-- Syntax for creating a scalar function in SQL
+
+CREATE FUNCTION function_name (parameter1 datatype, parameter2 datatype, ...)
+RETURNS return_datatype
+FUNCTION_ATTRIBUTES
+AS
+BEGIN
+    SQL statements
+    RETURN return_value;
+END;
+```
+
+```sql
+-- Example of a scalar function in SQL
+
+CREATE FUNCTION calculate_salary_bonus (salary DECIMAL(10, 2))
+RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+BEGIN
+    DECLARE bonus DECIMAL(10, 2);
+    SET bonus = salary * 0.1;
+    RETURN bonus;
+END;
+```
+
+```sql
+-- Syntax for creating a table-valued function in SQL
+
+CREATE FUNCTION function_name (parameter1 datatype, parameter2 datatype, ...)
+RETURNS TABLE
+FUNCTION_ATTRIBUTES
+AS
+RETURN
+    SELECT column1, column2
+    FROM table_name
+    WHERE condition;
+```
+
+Q: WHat the the most used Window functions in SQL?
+
+A: Window functions in SQL are used to perform calculations across a set of rows related to the current row. Some of the most commonly used window functions in SQL are:
+
+1. `ROW_NUMBER()`: Assigns a unique sequential integer to each row in the result set.
+2. `RANK()`: Assigns a unique rank to each row in the result set, with gaps in the ranking if there are ties.
+3. `DENSE_RANK()`: Assigns a unique rank to each row in the result set, without gaps in the ranking if there are ties.
+4. `NTILE()`: Divides the result set into a specified number of groups and assigns a group number to each row.
+5. `LEAD()`: Returns the value of a specified column from the next row in the result set.
+6. `LAG()`: Returns the value of a specified column from the previous row in the result set.
+7. `FIRST_VALUE()`: Returns the first value of a specified column in the result set.
+8. `LAST_VALUE()`: Returns the last value of a specified column in the result set.
+9. `SUM() OVER()`: Calculates the sum of a specified column across a set of rows related to the current row.
+10. `AVG() OVER()`: Calculates the average of a specified column across a set of rows related to the current row.
+11. `MAX() OVER()`: Calculates the maximum value of a specified column across a set of rows related to the current row.
+12. `MIN() OVER()`: Calculates the minimum value of a specified column across a set of rows related to the current row.
+
+```sql
+-- Example of using a window function in SQL
+
+SELECT employee_id, first_name, last_name, salary,
+       ROW_NUMBER() OVER (ORDER BY salary DESC) AS row_number,
+       RANK() OVER (ORDER BY salary DESC) AS rank,
+       DENSE_RANK() OVER (ORDER BY salary DESC) AS dense_rank
+FROM employees;
+```
+
+
+Q: What are clusters in SQL?
+
+A: Clusters in SQL are used to group rows that have the same values in one or more columns. Clusters are used to organize data in a table based on the values of one or more columns. Clusters can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of rows that need to be scanned. Clusters can also improve the readability of the SQL queries by grouping related rows together.
+
+```sql
+-- Syntax for creating a cluster in SQL
+
+CREATE CLUSTER cluster_name
+ON table_name (column1, column2, ...);
+```
+
+```sql
+-- Example of creating a cluster in SQL
+
+CREATE CLUSTER employee_cluster
+ON employees (department_id, job_id);
+```
+
+Q: What is partitioning in SQL?
+
+A: Partitioning in SQL is a technique used to divide a large table into smaller, more manageable parts called partitions. Partitioning can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of rows that need to be scanned. Partitioning can also improve the manageability of the database by allowing data to be stored in separate partitions based on a specified condition. There are several types of partitioning in SQL, such as range partitioning, list partitioning, hash partitioning, and composite partitioning. Partitioning can be done based on a single column or multiple columns. 
+
+```sql
+-- Syntax for creating a partition in SQL
+
+CREATE TABLE table_name
+(
+    column1 datatype,
+    column2 datatype,
+    ...
+)
+PARTITION BY RANGE (column1)
+(
+    PARTITION partition_name1 VALUES LESS THAN (value1),
+    PARTITION partition_name2 VALUES LESS THAN (value2),
+    ...
+);
+```
+
+```sql
+-- Example of creating a partition in SQL
+
+CREATE TABLE employees
+(
+    employee_id INT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    hire_date DATE
+)
+PARTITION BY RANGE (YEAR(hire_date))
+(
+    PARTITION p0 VALUES LESS THAN (1990),
+    PARTITION p1 VALUES LESS THAN (2000),
+    PARTITION p2 VALUES LESS THAN (2010),
+    PARTITION p3 VALUES LESS THAN (2020)
+);
+```
+
+Q: What is a database Deadlock?
+
+A: A database deadlock is a situation in which two or more transactions are waiting for each other to release locks on resources that the other transaction needs. Deadlocks can occur when two transactions are trying to update the same rows in a table in a different order. Deadlocks can cause transactions to hang indefinitely, leading to performance issues and data inconsistency. Deadlocks can be prevented by using proper indexing, minimizing the duration of transactions, and using lock escalation techniques.
+
+Q: What is Database Denormalization and the forms of denormalization?
+
+A: Database denormalization is the process of optimizing a database by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database. Denormalization can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. It can also reduce the complexity of the database schema and improve the readability of the SQL queries.
+
+Forms of denormalization:
+1. Horizontal denormalization: Horizontal denormalization involves splitting a table into multiple tables based on rows. This is done to reduce the number of rows in a table and improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
+2. Vertical denormalization: Vertical denormalization involves splitting a table into multiple tables based on columns. This is done to reduce the number of columns in a table and improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
+3. Star schema denormalization: Star schema denormalization involves denormalizing a star schema by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database.
+
+Q: What are database Normalization and the forms of normalization?
+
+A: Database normalization is the process of organizing a database into tables and columns to reduce redundancy and improve data integrity. Normalization involves dividing a database into multiple tables and defining relationships between the tables. There are several normal forms in database normalization, such as First Normal Form (1NF), Second Normal Form (2NF), Third Normal Form (3NF), Boyce-Codd Normal Form (BCNF), and Fourth Normal Form (4NF).
+
+Forms of normalization:
+1. First Normal Form (1NF): A table is in 1NF if it has a primary key and all columns are atomic (i.e., each column contains a single value).
+2. Second Normal Form (2NF): A table is in 2NF if it is in 1NF and all non-key columns are fully functionally dependent on the primary key.
+3. Third Normal Form (3NF): A table is in 3NF if it is in 2NF and all non-key columns are transitively dependent on the primary key.
+4. Boyce-Codd Normal Form (BCNF): A table is in BCNF if it is in 3NF and every determinant is a candidate key.
+5. Fourth Normal Form (4NF): A table is in 4NF if it is in BCNF and has no multi-valued dependencies.
+
+```sql
+-- Example of creating a table in 1NF
+
+CREATE TABLE employees
+(
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(100)
+);
+```
+
+```sql
+-- Example of creating a table in 2NF
+
+CREATE TABLE orders
+(
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2)
+);
+```
+Here, the total_amount column is fully functionally dependent on the primary key (order_id) because it is dependent on the order_id and not on the customer_id or order_date.
+
+```sql
+-- Example of creating a table in 3NF
+
+CREATE TABLE products
+(
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_id INT,
+    category_name VARCHAR(100)
+);
+```
+Here, the category_name column is transitively dependent on the primary key (product_id) through the category_id column. To normalize the table to 3NF, we can create a separate categories table with the category_id and category_name columns. 
+
+```sql
+-- Example of creating a table in BCNF
+
+CREATE TABLE employees
+(
+    employee_id INT PRIMARY KEY,
+    department_id INT,
+    department_name VARCHAR(100)
+);
+```
+Here, the department_name column is dependent on the department_id column, which is a candidate key. To normalize the table to BCNF, we can create a separate departments table with the department_id and department_name columns.
+
+```sql
+-- Example of creating a table in 4NF
+
+CREATE TABLE employees
+(
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(100),
+    phone_numbers VARCHAR(100)
+);
+```
+Here, the phone_numbers column contains multi-valued dependencies because it can contain multiple phone numbers for each employee. To normalize the table to 4NF, we can create a separate phone_numbers table with the employee_id and phone_number columns. 
+
+Q: What is the difference between a primary key, a unique key, Candidate key, and a foreign key?
+
+A: Primary key: A primary key is a column or a set of columns that uniquely identifies each row in a table. A primary key must be unique, not null, and have a unique constraint. A table can have only one primary key.
+
+Unique key: A unique key is a column or a set of columns that uniquely identifies each row in a table. A unique key must be unique, but it can contain null values. A table can have multiple unique keys.
