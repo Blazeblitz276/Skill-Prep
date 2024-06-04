@@ -1,2 +1,2 @@
 # Skill-Prep
-Preparation notes for various languages and some jey applications
+Preparation notes for various languages and tech
