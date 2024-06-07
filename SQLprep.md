@@ -790,7 +790,7 @@ CREATE TABLE products
 );
 ```
 
-Here, the category_name column is transitively dependent on the primary key (product_id) through the category_id column. To normalize the table to 3NF, we can create a separate categories table with the category_id and category_name columns. 
+Here, the category_name column is transitively dependent on the primary key (product_id) through the category_id column. To normalize the table to 3NF, we can create a separate categories table with the category_id and category_name columns.
 
 ```sql
 -- Example of creating a table in BCNF
