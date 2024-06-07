@@ -50,7 +50,6 @@ AWS provides several networking services that allow you to connect resources in 
 - AWS Direct Connect: A dedicated network connection that allows you to connect your on-premises data center to AWS. You can use Direct Connect to establish a private and secure connection to AWS resources without going over the public internet.
 - AWS CloudFront: A content delivery network (CDN) service that allows you to deliver content to users with low latency and high transfer speeds. You can use CloudFront to cache content at edge locations and improve the performance of web applications.
 
-
 ## AWS Security Services
 
 AWS provides several security services that allow you to secure your applications and data in the cloud. Some of the key security services are:
@@ -97,4 +96,28 @@ AWS provides several AI and machine learning services that allow you to build in
 
 - **Serverless computing**: In serverless computing, you run code without provisioning or managing servers. You upload your code to AWS Lambda and it automatically scales and runs in response to events. You pay only for the compute time that your code consumes, without worrying about the underlying infrastructure. Eg. AWS Lambda which will trigger the code based on the events.
 
-![AWS Compute Scenario](ReferImgs/image.png)
+![AWS Compute Scenario](ReferImgs/AWSComputes.png)
+
+## Storage Services using Direct and Archival Storage
+
+The storage types provided by AWS are:
+Direct Storage: Amazon S3, Amazon EBS, Amazon EFS
+Archival Storage: Amazon Glacier
+
+- **Amazon S3 (Simple Storage Service)**: An object storage service that allows you to store and retrieve any amount of data at any time. You can use S3 to store files, images, videos, and other types of data. S3 is highly durable, scalable, and secure. You can control access to your S3 buckets using bucket policies and access control lists (ACLs).
+
+- **Amazon EBS (Elastic Block Store)**: A block storage service that allows you to create and attach storage volumes to EC2 instances. You can use EBS volumes as primary storage for your EC2 instances. EBS volumes are persistent and can be detached from one EC2 instance and attached to another EC2 instance. You can take snapshots of your EBS volumes to back up your data and create new volumes from the snapshots.
+
+- **Amazon EFS (Elastic File System)**: A file storage service that allows you to create and mount file systems on EC2 instances. You can use EFS to share files between multiple EC2 instances. EFS file systems are highly available and scalable. You can mount an EFS file system on multiple EC2 instances and access the same files from all the instances.
+
+- **Amazon Glacier**: A low-cost storage service that is designed for data archiving and long-term backup. You can use Glacier to store data that is infrequently accessed and needs to be retained for a long period of time. Glacier provides three retrieval options: Expedited, Standard, and Bulk. You can choose the retrieval option based on your requirements.
+
+![AWS Storage Scenario](ReferImgs/Storage.png)!
+
+## Database Services using Relational and NoSQL Databases
+
+The database services provided by AWS are:
+
+- **Relational Databases**: Amazon RDS - The relational database service allows you to run relational databases in the cloud. You can use RDS to run MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB databases. RDS manages routine database tasks such as provisioning, patching, backup, recovery, and scaling. You can use RDS to build scalable and highly available database applications.
+
+- **NoSQL Databases**: Amazon DynamoDB - The NoSQL database service allows you to store and retrieve unstructured data in the cloud. You can use DynamoDB to build highly scalable and low-latency applications. DynamoDB is a fully managed service that provides seamless scalability, high availability, and low latency. You can use DynamoDB to build real-time applications that require high performance and low latency.
