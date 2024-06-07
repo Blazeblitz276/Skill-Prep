@@ -96,7 +96,7 @@ AWS provides several AI and machine learning services that allow you to build in
 
 - **Serverless computing**: In serverless computing, you run code without provisioning or managing servers. You upload your code to AWS Lambda and it automatically scales and runs in response to events. You pay only for the compute time that your code consumes, without worrying about the underlying infrastructure. Eg. AWS Lambda which will trigger the code based on the events.
 
-![AWS Compute Scenario](ReferImgs/AWSComputes.png)
+![AWS Compute Scenario](RefImgs/AWSComputes.png)
 
 ## Storage Services using Direct and Archival Storage
 
@@ -112,7 +112,7 @@ Archival Storage: Amazon Glacier
 
 - **Amazon Glacier**: A low-cost storage service that is designed for data archiving and long-term backup. You can use Glacier to store data that is infrequently accessed and needs to be retained for a long period of time. Glacier provides three retrieval options: Expedited, Standard, and Bulk. You can choose the retrieval option based on your requirements.
 
-![AWS Storage Scenario](ReferImgs/Storage.png)!
+![AWS Storage Scenario](RefImgs/Storage.png)!
 
 ## Database Services using Relational and NoSQL Databases
 
@@ -121,3 +121,7 @@ The database services provided by AWS are:
 - **Relational Databases**: Amazon RDS - The relational database service allows you to run relational databases in the cloud. You can use RDS to run MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB databases. RDS manages routine database tasks such as provisioning, patching, backup, recovery, and scaling. You can use RDS to build scalable and highly available database applications.
 
 - **NoSQL Databases**: Amazon DynamoDB - The NoSQL database service allows you to store and retrieve unstructured data in the cloud. You can use DynamoDB to build highly scalable and low-latency applications. DynamoDB is a fully managed service that provides seamless scalability, high availability, and low latency. You can use DynamoDB to build real-time applications that require high performance and low latency.
+
+![AWS Database Scenario](RefImgs/Database.png)!
+
+
