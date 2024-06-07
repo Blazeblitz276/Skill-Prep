@@ -49,3 +49,52 @@ AWS provides several networking services that allow you to connect resources in 
 - Amazon Route 53: A domain name system (DNS) service that allows you to route traffic to AWS resources based on domain names. You can use Route 53 to register domain names, manage DNS records, and configure health checks for your applications.
 - AWS Direct Connect: A dedicated network connection that allows you to connect your on-premises data center to AWS. You can use Direct Connect to establish a private and secure connection to AWS resources without going over the public internet.
 - AWS CloudFront: A content delivery network (CDN) service that allows you to deliver content to users with low latency and high transfer speeds. You can use CloudFront to cache content at edge locations and improve the performance of web applications.
+
+
+## AWS Security Services
+
+AWS provides several security services that allow you to secure your applications and data in the cloud. Some of the key security services are:
+
+- AWS Identity and Access Management (IAM): A service that allows you to manage access to AWS resources securely. You can create users, groups, and roles in IAM and assign permissions to them to control who can access your resources.
+- AWS Key Management Service (KMS): A service that allows you to create and manage encryption keys to protect your data. You can use KMS to encrypt data at rest and in transit and control access to your encrypted data.
+- AWS Shield: A managed Distributed Denial of Service (DDoS) protection service that helps protect your applications from DDoS attacks. You can use Shield to detect and mitigate DDoS attacks and ensure the availability of your applications.
+- AWS WAF (Web Application Firewall): A web application firewall that allows you to protect your web applications from common web exploits. You can use WAF to monitor and filter HTTP and HTTPS requests to your applications and block malicious traffic.
+
+## AWS Management Services
+
+AWS provides several management services that allow you to monitor, automate, and optimize your cloud resources. Some of the key management services are:
+
+- Amazon CloudWatch: A monitoring service that allows you to collect and track metrics, monitor logs, and set alarms for your AWS resources. You can use CloudWatch to monitor the performance of your applications and infrastructure.
+- AWS CloudFormation: An infrastructure as code service that allows you to create and manage AWS resources using templates. You can use CloudFormation to automate the deployment of your applications and infrastructure.
+- AWS Systems Manager: A management service that allows you to automate administrative tasks and manage your AWS resources. You can use Systems Manager to configure and maintain your EC2 instances, manage patching and compliance, and automate workflows.
+- AWS Trusted Advisor: An optimization service that provides recommendations to help you optimize your AWS resources. You can use Trusted Advisor to reduce costs, improve performance, and increase security by following best practices.
+
+## AWS Developer Tools
+
+AWS provides several developer tools that allow you to build, test, and deploy applications in the cloud. Some of the key developer tools are:
+
+- AWS CodeCommit: A source control service that allows you to store and manage code repositories in the cloud. You can use CodeCommit to collaborate with other developers and manage your source code.
+- AWS CodeBuild: A build service that allows you to compile and test code in the cloud. You can use CodeBuild to automate the build process and generate artifacts for your applications.
+- AWS CodeDeploy: A deployment service that allows you to automate the deployment of applications to EC2 instances, Lambda functions, and on-premises servers. You can use CodeDeploy to deploy code changes with minimal downtime and monitor the deployment process.
+- AWS CodePipeline: A continuous integration and continuous deployment (CI/CD) service that allows you to automate the release process for your applications. You can use CodePipeline to build, test, and deploy code changes across multiple environments.
+- AWS X-Ray: A debugging and tracing service that allows you to analyze and debug distributed applications. You can use X-Ray to trace requests as they travel through your application and identify performance bottlenecks.
+- AWS SDKs: Software development kits (SDKs) that allow you to interact with AWS services from your applications. You can use SDKs to access AWS services programmatically and build applications that integrate with AWS services.
+
+## AWS AI and Machine Learning Services
+
+AWS provides several AI and machine learning services that allow you to build intelligent applications in the cloud. Some of the key AI and machine learning services are:
+
+- Amazon SageMaker: A fully managed machine learning service that allows you to build, train, and deploy machine learning models. You can use SageMaker to build predictive models, analyze data, and generate insights for your business.
+- Amazon Rekognition: A deep learning-based image and video analysis service that allows you to analyze and recognize objects, scenes, and faces in images and videos. You can use Rekognition to build applications that can automatically tag and search images and videos.
+- Amazon Polly: A text-to-speech service that allows you to convert text into lifelike speech. You can use Polly to build applications that can read text aloud and provide voice-enabled interfaces.
+- Amazon Lex: A conversational interface service that allows you to build chatbots and voice-enabled applications. You can use Lex to create natural language understanding models and integrate them with your applications.
+- Amazon Comprehend: A natural language processing service that allows you to analyze text and extract insights from it. You can use Comprehend to identify key phrases, entities, and sentiment in text data.
+- Amazon Translate: A neural machine translation service that allows you to translate text between languages. You can use Translate to build applications that can translate text in real-time and support multilingual communication.
+
+## Compute using Server and Serverless Services
+
+- **Server-based computing**: In server-based computing, you provision virtual servers, known as instances, on AWS EC2 and run applications on them. You have full control over the servers and can customize them based on your requirements. You pay for the compute capacity that you provision, regardless of whether the servers are running or not.
+
+- **Serverless computing**: In serverless computing, you run code without provisioning or managing servers. You upload your code to AWS Lambda and it automatically scales and runs in response to events. You pay only for the compute time that your code consumes, without worrying about the underlying infrastructure. Eg. AWS Lambda which will trigger the code based on the events.
+
+![AWS Compute Scenario](ReferImgs/image.png)
