@@ -1,29 +1,41 @@
 # Python Prep work and main concepts
 
 ### Merging dictionaries
-- unpacking into a new dict 
+
+- unpacking into a new dict
+
 ```python
 {**dict1,**dict2}
 ```
+
 - using the update method
+
 ```python
 dict1.update(dict2)
 ```
+
 - using the dict comprehension
+
 ```python
 {key: value for d in [dict1, dict2] for key, value in d.items()}
 ```
+
 - using the merge operator in Python 3.9
+
 ```python
 dict1 | dict2
 ```
+
 - But if we have duplicate keys, the last key will be the one that is kept.
+
 - To avoid this, we can use the dict comprehension method to update the values into a list of both keys if needed.
+
 ```python
 {key: [d[key] for d in [dict1, dict2] if key in d] for key in set(dict1) | set(dict2)}
 ```
 
 ### what are generators and yield ?
+
 - Generators are iterators, but you can only iterate over them once. It’s because they do not store all the values in memory, they generate the values on the fly.
 - You can create a generator function with `yield` instead of `return`.
 - The `yield` keyword is used to return a value from a generator function.
@@ -47,6 +59,7 @@ print(next(gen)) # StopIteration
 ```
 
 ### Type checking variables in Python
+
 - Python is a dynamically typed language, so the type of a variable is determined at runtime.
 - But we can use the `typing` module to type check variables.
 - We can use the `isinstance()` function to check the type of a variable.
@@ -56,11 +69,13 @@ print(next(gen)) # StopIteration
 
 
 ### Type hinting in Python
+
 - Type hinting is a feature that allows us to specify the type of a variable in Python.
 - We can use the `typing` module to specify the type of a variable.
 - We can use the `mypy` tool to check the type of variables in our code.
 - We can use the `@type` decorator to check the type of a function.
 - We can use the `@overload` decorator to check the type of a function with multiple signatures.     
+
 ```python
 from typing import overload
 @overload
@@ -77,6 +92,7 @@ def add(a, b):
 ```
 
 ### Using the `@property` decorator in Python
+
 - The `@property` decorator is used to define a property in a class.
 - The `@property` decorator allows us to define a method that can be accessed as an attribute.
 - The `@property` decorator is used to define a getter method.
@@ -109,6 +125,7 @@ print(circle.diameter) # 10
 ```
 
 ### Sets and methods in Python
+
 - Sets are unordered collections of unique elements.
 - Sets are mutable, so we can add or remove elements from a set.
 - Sets are iterable, so we can loop over the elements in a set.
@@ -122,6 +139,7 @@ print(set1 & set2) # {4, 5}
 print(set1 - set2) # {1, 2, 3}
 print(set1 ^ set2) # {1, 2, 3, 6, 7, 8}
 ```
+
 ```python
 set1 = {1, 2, 3, 4, 5}
 set2 = {4, 5, 6, 7, 8}
@@ -156,15 +174,19 @@ set6 = set1.union(set2)
 print(set6)  # {1, 2, 4, 5, 6, 7, 8}
 ```
 ### Sorting based on the key descending
+
 ```python
 k = dict(sorted(d.items(), key=lambda x: x[0], reverse=True))
 ```
+
 ### Sorting based on the value descending
+
 ```python
 k = dict(sorted(d.items(), key=lambda x: x[1], reverse=True))
 ```
 
 ### what is assertion ?
+
 - An assertion is a sanity check to make sure your code isn’t doing something obviously wrong.
 - The `assert` statement is used to check if a condition is True.
 - If the condition is False, the `assert` statement will raise an `AssertionError` exception.
@@ -181,6 +203,7 @@ assert x != "hello", "x should be 'hello'"
 ```
 
 ### LRU cache in Python
+
 - The `functools` module provides a decorator called `lru_cache` that caches the result of a function.
 - The `lru_cache` decorator caches the result of a function with a maximum size.
 - The `lru_cache` decorator caches the result of a function with a maximum size and a time-to-live.
@@ -198,7 +221,9 @@ print(fib(10))
 print(fib(20))
 print(fib(30))
 ```
+
 ### Caching Strategies in Python
+
 | Strategy                    | Eviction policy                      | Use case                                      |
 |-----------------------------|--------------------------------------|-----------------------------------------------|
 | First-In/First-Out (FIFO)   | Evicts the oldest of the entries      | Newer entries are most likely to be reused    |
@@ -206,19 +231,17 @@ print(fib(30))
 | Least Recently Used (LRU)   | Evicts the least recently used entry  | Recently used entries are most likely to be reused |
 | Most Recently Used (MRU)    | Evicts the most recently used entry   | Least recently used entries are most likely to be reused |
 | Least Frequently Used (LFU) | Evicts the least often accessed entry | Entries with a lot of hits are more likely to be reused |
-
-
-
-
-
+| Most Frequently Used (MFU)  | Evicts the most often accessed entry  | Entries with fewer hits are more likely to be reused |
 
 ### Using the `@staticmethod` decorator in Python
+
 - The `@staticmethod` decorator is used to define a static method in a class.
 - The `@staticmethod` decorator does not have access to the instance of the class.
 - The `@staticmethod` decorator does not have access to the class itself.
 - The `@staticmethod` decorator does not have access to the class attributes.
 - The `@staticmethod` decorator does not have access to the instance attributes.
 - The `@staticmethod` decorator is used to define a utility function in a class.
+
 ```python
 class Circle:
     def __init__(self, radius):
@@ -243,6 +266,7 @@ print(circle.diameter(5)) # 10
 ```
 
 ### string to list and list to string
+
 ```python   
 s = "hello"
 l = list(s)
@@ -251,6 +275,7 @@ print(l) # ['h', 'e', 'l', 'l', 'o']
 ```
 
 ### lstrip, rstrip, strip and split methods
+
 - lstrip() - Removes any leading characters
 - rstrip() - Removes any trailing characters
 - strip() - Removes any leading and trailing characters
@@ -273,6 +298,7 @@ print(s.lstrip('abc.')) # 'world'
 ```
 
 ### User defined error handling
+
 - We can create custom exceptions by inheriting from the `Exception` class.
 - We can raise custom exceptions using the `raise` statement.
 - We can catch custom exceptions using the `try` and `except` blocks.
@@ -294,18 +320,23 @@ finally:
     print("This is the finally block")
 ```
 ### ASCII and character conversion
+
 - The `ord()` function returns the ASCII value of a character.
 - The `chr()` function returns the character of an ASCII value.
+
 ```python
 print(ord('a')) # 97
 print(chr(97)) # a
 ```
+
 ### Shallow and deepcopy syntax and usage in Python
+
 - The `copy` module provides the `copy` and `deepcopy` functions to create shallow and deep copies of objects.
 - The `copy` function creates a shallow copy of an object.
 - The `deepcopy` function creates a deep copy of an object.
 - A shallow copy creates a new object, but does not create new objects for the nested objects.
 - A deep copy creates a new object and creates new objects for the nested objects.
+
 ```python
 from copy import copy, deepcopy
 
@@ -318,7 +349,9 @@ print(l1) # [10, 2, 3]
 print(l2) # [1, 2, 3]
 print(l3) # [1, 2, 3]
 ```
+
 - Without using the `copy` module, we can use the slicing syntax to create a shallow copy of a list.
+
 ```python
 l1 = [1, 2, 3]
 l2 = l1[:]
@@ -326,8 +359,8 @@ l1[0] = 10
 print(l1) # [10, 2, 3]
 print(l2) # [1, 2, 3]
 ```
-
 ### Closure and scope in Python
+
 - A closure is a function that captures the environment in which it was defined.
 - In Python, closures grant nested functions read-only access to variables of the enclosing scope.
 - A closure is a function that returns a function.
@@ -340,7 +373,9 @@ def outer_func():
     return inner_func
 outer_func()()
 ```
+
 ### Typehinting in Python
+
 - Type hinting is a feature that allows us to specify the type of a variable in Python.
 - We can use the `typing` module to specify the type of a variable.
 
@@ -360,7 +395,9 @@ def get_value(a: int, b: int) -> Union[int, str]:
         return a
     return "Not equal"
 ```
+
 ### API calling in Python
+
 - We can use the `requests` module to make API calls in Python.
 - We can use the `requests.get()` method to make a GET request.
 - We can use the `requests.post()` method to make a POST request.
@@ -371,7 +408,7 @@ def get_value(a: int, b: int) -> Union[int, str]:
 - We can use the `requests.options()` method to make an OPTIONS request.
 - We can use the `requests.request()` method to make a custom request.
 
-```python   
+```python
 import requests
 
 response = requests.get("https://api.github.com")
@@ -379,7 +416,8 @@ print(response.status_code) # 200
 print(response.json()) # {'current_user_url': 'https://api.github.com/user', 'current_user_authorizations_html_url': '
 ```
 
-### bash executions in py scripts 
+### bash executions in py scripts
+
 - We can use the `subprocess` module to execute bash commands in Python.
 - We can use the `subprocess.run()` method to execute a bash command.
 - We can use the `subprocess.Popen()` method to execute a bash command.
@@ -400,7 +438,9 @@ subprocess.check_call("ls -l", shell=True)
 subprocess.check_output("ls -l", shell=True)
 subprocess.check_output("ls -l", shell=True)
 ```
+
 - Without using the `subprocess` module, we can use the `os` module to execute bash commands in Python.
+
 ```python
 import os
 
@@ -410,6 +450,7 @@ os.popen("ls -l").read()
 ```
 
 ### readline(s), hasline(s) and writeline(s) methods
+
 - The `readline()` method reads a single line from a file.
 - The `readlines()` method reads all the lines from a file.
 - The `hasline()` method checks if a file has a line.
@@ -426,6 +467,7 @@ with open("file.txt", "r") as file:
 ```
 
 ### learning os module in Python
+
 - The `os` module provides a way to interact with the operating system.
 ```python
 import os
@@ -528,7 +570,7 @@ finish = time.perf_counter()
 print(f'Finished in {round(finish-start, 2)} second(s)')
 ```
 
-#  Learning Numpy in Python
+## Learning Numpy in Python
 
 ### What is Numpy?
 
@@ -555,7 +597,7 @@ Q: How are NumPy arrays better than Python’s lists?
 
 - Python lists support storing heterogeneous data types whereas NumPy arrays can store datatypes of one nature itself.
 - NumPy arrays are treated as objects which results in minimal memory usage. Since Python keeps track of objects by creating or deleting them based on the requirements, NumPy objects are also treated the same way. This results in lesser memory wastage.
--  NumPy arrays are faster than Python lists because of the following reasons:
+- NumPy arrays are faster than Python lists because of the following reasons:
     - NumPy arrays are stored at one continuous place in memory unlike lists, so processes can access and manipulate them very efficiently.
     - NumPy arrays are optimized  This is because they are stored in contiguous blocks of memory and are highly optimized for performance.
     - NumPy is written in C and Python, which makes it faster than Python lists.
