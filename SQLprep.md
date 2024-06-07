@@ -521,6 +521,18 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER passwordlenCheck
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    IF LENGTH(NEW.password) < 8 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Password must be at least 8 characters long';
+    END IF;
+END$$
+DELIMITER ;
 ```
 
 Q: What is a view in SQL?
@@ -797,3 +809,26 @@ Q: What is the difference between a primary key, a unique key, Candidate key, an
 A: Primary key: A primary key is a column or a set of columns that uniquely identifies each row in a table. A primary key must be unique, not null, and have a unique constraint. A table can have only one primary key.
 
 Unique key: A unique key is a column or a set of columns that uniquely identifies each row in a table. A unique key must be unique, but it can contain null values. A table can have multiple unique keys.
+
+Q: What id SQL Injection?
+
+A: SQL injection is a type of security vulnerability that occurs when an attacker is able to manipulate a database query by injecting malicious SQL code into an input field. SQL injection attacks can be used to bypass authentication, retrieve sensitive data, modify data, and execute arbitrary SQL commands. SQL injection attacks can be prevented by using parameterized queries, input validation, and escaping special characters.
+
+Q: What is COALESCE in SQL?
+
+A: COALESCE in SQL is a function that returns the first non-null value in a list of expressions. COALESCE is used to handle null values in a query by returning a default value if the expression evaluates to null. COALESCE can take multiple arguments and returns the first non-null value in the list.
+
+```sql
+-- Example of using COALESCE in SQL
+
+SELECT COALESCE(column1, column2, 'default_value') AS result
+FROM table_name;
+```
+
+Q: How to use CASE statement in SQL?
+
+A: 
+
+Q: How to connect to SQL using Python?
+
+A: 

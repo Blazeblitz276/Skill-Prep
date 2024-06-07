@@ -440,3 +440,123 @@ os.path.exists("file.txt")
 os.path.isfile("file.txt")
 os.path.isdir("file.txt")
 ```
+
+Q: How to change file permissions in Python?
+
+A: We can use the `os` module to change file permissions in Python.
+
+```python
+import os
+
+os.chmod("file.txt", 0o777)
+```
+
+Q: How to manipulate OS environment variables in Python?
+
+A: We can use the `os` module to manipulate OS environment variables in Python.
+
+```python
+import os
+
+os.environ
+os.environ["HOME"]
+os.environ["HOME"] = "/home/user"
+
+os.getenv("HOME")
+os.putenv("HOME", "/home/user")
+```
+
+Q: Multithreading and Multiprocessing in Python?
+
+A: We can use the `threading` module to create and manage threads in Python.
+
+```python
+import threading
+import time
+
+# Counting Active threads
+threading.active_count()
+
+# Enumerating all active threads
+threading.enumerate()
+
+# Getting the current thread object
+threading.current_thread()
+
+# Creating a new thread
+MyThread = threading.Thread(target=func, args=(1, 2)).start()
+MyThread.start()
+
+#EG: 
+
+def eat_breakfast():
+    time.sleep(3)
+    print("You ate breakfast")
+
+def drink_coffee():
+    time.sleep(4)
+    print("You drank coffee")
+
+def study():
+    time.sleep(5)
+    print("You finished studying")
+
+#using time module to measure the performance of the threads
+start = time.perf_counter()
+
+t1 = threading.Thread(target=eat_breakfast)
+t2 = threading.Thread(target=drink_coffee)
+t3 = threading.Thread(target=study)
+
+t1.start()
+t2.start()
+t3.start()
+
+
+# if we want the main thread to wait for the execution of the threads then the join method is used before the Main thread starts
+t1.join()
+t2.join()
+t3.join()
+
+print(threading.active_count())
+print(threading.enumerate())
+print(start)
+
+
+
+finish = time.perf_counter()
+print(f'Finished in {round(finish-start, 2)} second(s)')
+```
+
+#  Learning Numpy in Python
+
+### What is Numpy?
+
+- NumPy is a Python library that provides support for large, multi-dimensional arrays and matrices.
+- NumPy is a powerful library that provides support for mathematical functions to operate on these arrays and matrices.
+- NumPy is written in C and Python and provides a high-performance multidimensional array object called `ndarray`.
+
+### Creating NumPy arrays
+
+- We can create NumPy arrays using the `np.array()` function. 
+- We can create NumPy arrays using the `np.zeros()` function. zeros(shape)
+- We can create NumPy arrays using the `np.ones()` function. ones(shape)
+- We can create NumPy arrays using the `np.full()` function. full(shape, fill_value) 
+- We can create NumPy arrays using the `np.arange()` function. arange(start, stop, step)
+- We can create NumPy arrays using the `np.linspace()` function. linspace(start, stop, num)
+- We can create NumPy arrays using the `np.random.rand()` function. rand(shape)
+- We can create NumPy arrays using the `np.random.randn()` function. randn(shape)
+- We can create NumPy arrays using the `np.random.randint()` function. randint(low, high, size)
+- We can create NumPy arrays using the `np.random.random()` function. random(size)
+
+## Numpy Interview Questions
+
+Q: How are NumPy arrays better than Python’s lists?
+
+- Python lists support storing heterogeneous data types whereas NumPy arrays can store datatypes of one nature itself.
+- NumPy arrays are treated as objects which results in minimal memory usage. Since Python keeps track of objects by creating or deleting them based on the requirements, NumPy objects are also treated the same way. This results in lesser memory wastage.
+-  NumPy arrays are faster than Python lists because of the following reasons:
+    - NumPy arrays are stored at one continuous place in memory unlike lists, so processes can access and manipulate them very efficiently.
+    - NumPy arrays are optimized  This is because they are stored in contiguous blocks of memory and are highly optimized for performance.
+    - NumPy is written in C and Python, which makes it faster than Python lists.
+
