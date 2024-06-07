@@ -112,7 +112,7 @@ Archival Storage: Amazon Glacier
 
 - **Amazon Glacier**: A low-cost storage service that is designed for data archiving and long-term backup. You can use Glacier to store data that is infrequently accessed and needs to be retained for a long period of time. Glacier provides three retrieval options: Expedited, Standard, and Bulk. You can choose the retrieval option based on your requirements.
 
-![AWS Storage Scenario](RefImgs/Storage.png)!
+![AWS Storage Scenario](RefImgs/Storage.png)
 
 ## Database Services using Relational and NoSQL Databases
 
@@ -122,6 +122,28 @@ The database services provided by AWS are:
 
 - **NoSQL Databases**: Amazon DynamoDB - The NoSQL database service allows you to store and retrieve unstructured data in the cloud. You can use DynamoDB to build highly scalable and low-latency applications. DynamoDB is a fully managed service that provides seamless scalability, high availability, and low latency. You can use DynamoDB to build real-time applications that require high performance and low latency.
 
-![AWS Database Scenario](RefImgs/Database.png)!
+![AWS Database Scenario](RefImgs/Database.png)
 
+## AWS Security and Compliance Services
 
+AWS provides several security and compliance services that help you secure your applications and data in the cloud. Some of the key security and compliance services are:
+
+- **AWS Identity and Access Management (IAM)**: A service that allows you to manage access to AWS resources securely. You can create users, groups, and roles in IAM and assign permissions to them to control who can access your resources.
+
+- **AWS Key Management Service (KMS)**: A service that allows you to create and manage encryption keys to protect your data. You can use KMS to encrypt data at rest and in transit and control access to your encrypted data.
+
+- **AWS Shield**: A managed Distributed Denial of Service (DDoS) protection service that helps protect your applications from DDoS attacks. You can use Shield to detect and mitigate DDoS attacks and ensure the availability of your applications.
+
+- **AWS Compliance Programs**: AWS offers several compliance programs that help you meet industry-specific regulatory requirements. You can use these programs to demonstrate the security and compliance of your applications and data.
+
+![Pricing](RefImgs/Pricing.png)
+
+## Data Analytics and Machine Learning Services
+
+AWS provides several data analytics and machine learning services that allow you to analyze data, build predictive models, and generate insights for your business. Some of the key data analytics and machine learning services are:
+
+- **Amazon Redshift**: A data warehousing service that allows you to run analytics queries on large datasets. You can use Redshift to analyze data from multiple sources and generate insights for your business. Redshift stores data in columnar format and uses massively parallel processing (MPP) to run queries in parallel.
+
+- **Amazon Glue**: A data catalog and ETL (extract, transform, load) service that allows you to prepare and load data for analytics. You can use Glue to discover, catalog, and transform data from various sources and make it available for analysis.
+
+![Data Analytics](RefImgs/DA.png)
