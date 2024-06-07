@@ -9,7 +9,7 @@
 
 ## Global Infrastructure
 
-AWS has a global infrastructure that is divided into regions and availability zones. A region is a geographical area that consists of two or more availability zones. An availability zone is a data center that is isolated from other data centers in the same region. Each availability zone is connected to the other availability zones in the same region through a low-latency network. This allows you to build highly available and fault-tolerant applications. 
+AWS has a global infrastructure that is divided into regions and availability zones. A region is a geographical area that consists of two or more availability zones. An availability zone is a data center that is isolated from other data centers in the same region. Each availability zone is connected to the other availability zones in the same region through a low-latency network. This allows you to build highly available and fault-tolerant applications.
 
 Apart from regions and availability zones, AWS also has edge locations. Edge locations are used by the CloudFront service to cache content closer to the end-users. This reduces latency and improves the performance of web applications. CloudFront is a content delivery network (CDN) service that delivers content to users based on their geographical location.
 
@@ -49,4 +49,3 @@ AWS provides several networking services that allow you to connect resources in 
 - Amazon Route 53: A domain name system (DNS) service that allows you to route traffic to AWS resources based on domain names. You can use Route 53 to register domain names, manage DNS records, and configure health checks for your applications.
 - AWS Direct Connect: A dedicated network connection that allows you to connect your on-premises data center to AWS. You can use Direct Connect to establish a private and secure connection to AWS resources without going over the public internet.
 - AWS CloudFront: A content delivery network (CDN) service that allows you to deliver content to users with low latency and high transfer speeds. You can use CloudFront to cache content at edge locations and improve the performance of web applications.
-
