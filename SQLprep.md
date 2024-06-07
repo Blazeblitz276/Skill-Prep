@@ -15,6 +15,7 @@ Transaction Control Language (TCL) - `COMMIT, ROLLBACK, SAVEPOINT, SET TRANSACTI
 Data Query Language (DQL) - `SELECT, JOIN, UNION, WHERE` etc.
 
 Syntax:
+
 ```sql
 
 CREATE TABLE [table_name] (
@@ -50,6 +51,7 @@ WHERE employee_id = 1;
 Data Control operations: These operations are used to control the access to the data in the database. These are done using GRANT and REVOKE operations.
 
 `GRANT` privilidges include; `SELECT, INSERT, UPDATE, DELETE, REFERENCES, ALTER, INDEX, CREATE, DROP, GRANT OPTION, ALL PRIVILEGES`.
+
 ```sql
 GRANT SELECT, INSERT, UPDATE, DELETE ON employees TO  'john'@'localhost';
 
@@ -83,6 +85,7 @@ A: ACID stands for Atomicity, Consistency, Isolation, and Durability. These are 
 Illustrating all four ACID properties (Atomicity, Consistency, Isolation, and Durability) with a single coherent example using a banking application where we want to transfer money between two accounts.
 
 Table Definitions:
+
 ```sql
 CREATE TABLE accounts (
     account_id INT PRIMARY KEY,
@@ -99,7 +102,7 @@ CREATE TABLE transactions (
 );
 ```
 
--   Atomicity: The transfer of money between two accounts should be an atomic operation, meaning it should either succeed completely or fail completely. If any part of the transaction fails, the entire transaction should be rolled back.
+- Atomicity: The transfer of money between two accounts should be an atomic operation, meaning it should either succeed completely or fail completely. If any part of the transaction fails, the entire transaction should be rolled back.
 
 ```sql
 START TRANSACTION;
@@ -130,7 +133,7 @@ ELSE
 END IF;
 ```
 
--   Consistency: The transfer of money should maintain the consistency of the database. This means that the database should be in a valid state before and after the transaction. Consistency ensures that the database transitions from one valid state to another, maintaining all predefined rules and constraints.
+- Consistency: The transfer of money should maintain the consistency of the database. This means that the database should be in a valid state before and after the transaction. Consistency ensures that the database transitions from one valid state to another, maintaining all predefined rules and constraints.
 
 In this example, the balance of each account should not be negative. We have a CHECK constraint on the balance column to enforce this rule.
     - Balance Check Constraint: Ensures that no account balance becomes negative.
@@ -169,71 +172,78 @@ ELSE
     END IF;
 END IF;
 ```
+
 By setting the isolation level to SERIALIZABLE, we ensure that no other transactions can interfere with this transaction.
 
--  Durability: The transfer of money between two accounts should be durable, meaning that once the transaction is committed, the changes should persist even in the event of a system failure. This is typically achieved through mechanisms like write-ahead logging and database backups. Once the `COMMIT` statement is executed, all changes are saved permanently in the database. Even if the system crashes immediately after the commit, the changes will persist.
+- Durability: The transfer of money between two accounts should be durable, meaning that once the transaction is committed, the changes should persist even in the event of a system failure. This is typically achieved through mechanisms like write-ahead logging and database backups. Once the `COMMIT` statement is executed, all changes are saved permanently in the database. Even if the system crashes immediately after the commit, the changes will persist.
 
 Q: What are Database isolation levels in SQL?
 
 A: Database isolation levels define the degree to which one transaction must be isolated from the effects of other transactions. There are four standard isolation levels in SQL:
 
 1. READ UNCOMMITTED: This is the lowest isolation level where transactions can read uncommitted changes made by other transactions. This level allows dirty reads, non-repeatable reads, and phantom reads.
-```sql
--- Transaction 1
-START TRANSACTION;
-UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
 
--- Transaction 2
-START TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT * FROM accounts WHERE account_id = 1;  -- Can see the uncommitted update by Transaction 1
-```
+    ```sql
+    -- Transaction 1
+    START TRANSACTION;
+    UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+
+    -- Transaction 2
+    START TRANSACTION;
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+    SELECT * FROM accounts WHERE account_id = 1;  -- Can see the uncommitted update by Transaction 1
+    ```
 
 2. READ COMMITTED: This isolation level ensures that a transaction can only read committed data from other transactions. It prevents dirty reads but allows non-repeatable reads and phantom reads.
-```sql
--- Transaction 1
-START TRANSACTION;
-UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
-COMMIT;
 
--- Transaction 2
-START TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the uncommitted update by Transaction 1
-```
+    ```sql
+    -- Transaction 1
+    START TRANSACTION;
+    UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+    COMMIT;
+
+    -- Transaction 2
+    START TRANSACTION;
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the uncommitted update by Transaction 1
+    ```
 
 3. REPEATABLE READ: This isolation level ensures that a transaction can read the same data multiple times without changes from other transactions. It prevents dirty reads and non-repeatable reads but allows phantom reads.
-```sql
--- Transaction 1
-START TRANSACTION;
-SELECT * FROM accounts WHERE account_id = 1;
 
--- Transaction 2
-START TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
-COMMIT;
+    ```sql
+    -- Transaction 1
+    START TRANSACTION;
+    SELECT * FROM accounts WHERE account_id = 1;
 
--- Transaction 1
-SELECT * FROM accounts WHERE account_id = 1;  -- Can see the new row inserted by Transaction 2
-```
+    -- Transaction 2
+    START TRANSACTION;
+    SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+    INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
+    COMMIT;
+
+    -- Transaction 1
+    SELECT * FROM accounts WHERE account_id = 1;  -- Can see the new row inserted by Transaction 2
+    ```
 
 4. SERIALIZABLE: This is the highest isolation level that ensures complete isolation between transactions. It prevents dirty reads, non-repeatable reads, and phantom reads by locking the data being read by a transaction until the transaction is completed.
-```sql
--- Transaction 1
-START TRANSACTION;
-SELECT * FROM accounts WHERE account_id = 1;
 
--- Transaction 2
-START TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
-COMMIT;
+    ```sql
+    -- Transaction 1
+    START TRANSACTION;
+    SELECT * FROM accounts WHERE account_id = 1;
 
--- Transaction 1
-SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the new row inserted by Transaction 2
-```
+    -- Transaction 2
+    START TRANSACTION;
+    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+    INSERT INTO accounts (account_id, account_name, balance) VALUES (3, 'Account C', 500);
+    COMMIT;
+
+    -- Transaction 1
+    SELECT * FROM accounts WHERE account_id = 1;  -- Cannot see the new row inserted by Transaction 2
+    ```
+
 Practical Usage
+
 - Read Uncommitted: Used when performance is critical, and the application can tolerate dirty reads, such as in logging or monitoring systems.
 - Read Committed: Commonly used as the default isolation level in many databases, balancing performance and data consistency.
 - Repeatable Read: Used when applications require consistent reads within a transaction but can tolerate phantom reads.
@@ -263,8 +273,6 @@ A: The order of execution of SQL queries is as follows:
 18. `STORED` PROCEDURE: The STORED PROCEDURE clause is used to define a set of SQL statements that can be executed as a single unit.
 19. `FUNCTION`: The FUNCTION clause is used to define a set of SQL statements that can be executed as a single unit and return a value.
 
-
-
 Q: What are the different types of SQL JOINS?
 
 A: There are 6 types of SQL JOINS:
@@ -273,7 +281,7 @@ A: There are 6 types of SQL JOINS:
 2. `LEFT JOIN`: Returns all records from the left table and the matched records from the right table.
 3. `RIGHT JOIN`: Returns all records from the right table and the matched records from the left table.
 4. `FULL JOIN`: Returns all records when there is a match in either left or right table.
-5. `SELF JOIN`: A self join is a regular join, but the table is joined with itself. This is useful for comparing values in a column with other values in the same column in the same table. 
+5. `SELF JOIN`: A self join is a regular join, but the table is joined with itself. This is useful for comparing values in a column with other values in the same column in the same table.
 6. `CROSS JOIN`: Returns the Cartesian product of the two tables. That is, it returns all possible combinations of rows from the two tables. It is useful when you want to combine every row from one table with every row from another table.
 
 Q: What is NATURAL JOIN?
@@ -329,6 +337,7 @@ A: The `GROUP BY` clause is used to group rows that have the same values into su
 Q: Is it required that the JOIN condition be based on equality?
 
 A: No, the JOIN condition does not have to be based on equality. The JOIN condition can be based on any condition that evaluates to true or false. We can use any of the common symbols such as <, <=, >, >=, !=, BETWEEN operators in the JOIN condition.
+
 ```sql
 SELECT column1, column2
 FROM table1
@@ -337,11 +346,11 @@ JOIN table2 ON table1.column1 > table2.column1;
 
 Q: What is a HASH JOIN?
 
-A: A `HASH JOIN` requires two inputs, an INNER table, and an OUTER table. `HASH JOINS` involve using a HASH table to identify matching rows between two tables. `HASH JOINS` are an option when other joins are not recommended. When joining large data sets that are unsorted or non-indexed `HASH JOINS` are better. `HASH JOINS` are faster than MERGE JOINS and LOOP JOINS. `HASH JOINS` are used when the tables are large and do not fit in memory. 
+A: A `HASH JOIN` requires two inputs, an INNER table, and an OUTER table. `HASH JOINS` involve using a HASH table to identify matching rows between two tables. `HASH JOINS` are an option when other joins are not recommended. When joining large data sets that are unsorted or non-indexed `HASH JOINS` are better. `HASH JOINS` are faster than MERGE JOINS and LOOP JOINS. `HASH JOINS` are used when the tables are large and do not fit in memory.
 
 Q: What is a MERGE JOIN?
 
-A: A MERGE JOIN is a join operation that combines two sorted data sets into a single result set. MERGE JOINS are used when the tables are already sorted on the join key. MERGE JOINS are faster than LOOP JOINS but slower than `HASH JOINS`. MERGE JOINS are used when the tables are small and fit in memory. 
+A: A MERGE JOIN is a join operation that combines two sorted data sets into a single result set. MERGE JOINS are used when the tables are already sorted on the join key. MERGE JOINS are faster than LOOP JOINS but slower than `HASH JOINS`. MERGE JOINS are used when the tables are small and fit in memory.
 
 ```sql
 SELECT column1, column2
@@ -356,7 +365,7 @@ A: A LOOP JOIN is a join operation that compares each row from the first table w
 
 Q: What is indexing in SQL?
 
-A: Indexing in SQL is a technique used to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by creating an index on a table. An index is a data structure that stores the values of one or more columns in a table in a sorted order, allowing the database to quickly locate the rows that match a specified condition. Indexing can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. 
+A: Indexing in SQL is a technique used to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by creating an index on a table. An index is a data structure that stores the values of one or more columns in a table in a sorted order, allowing the database to quickly locate the rows that match a specified condition. Indexing can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned.
 
 Q: What are the different types of indexes in SQL?
 
@@ -405,6 +414,7 @@ Q: Database Denormalization and its advantages?
 A: Database denormalization is the process of optimizing a database by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database. Denormalization can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. It can also reduce the complexity of the database schema and improve the readability of the SQL queries.
 
 Advantages of database denormalization:
+
 1. Improved performance: Denormalization can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database.
 2. Reduced complexity: Denormalization can reduce the complexity of the database schema by adding redundant data to one or more tables.
 3. Improved readability: Denormalization can improve the readability of the SQL queries by reducing the number of joins required to retrieve data from the database.
@@ -442,12 +452,13 @@ CREATE TABLE product_cache (
     price DECIMAL(10, 2)
 );
 ```
+
 Disadvantages of database denormalization:
+
 1. Increased storage space: Denormalization can increase the storage space required to store redundant data in one or more tables.
 2. Data redundancy: Denormalization can introduce data redundancy by storing the same data in multiple tables.
 3. Data inconsistency: Denormalization can lead to data inconsistency by storing redundant data in one or more tables.
 4. Complicated write operations: Denormalization can complicate write operations by requiring updates to redundant data in one or more tables.
-
 
 Q: What are stored procedures in SQL?
 
@@ -463,8 +474,8 @@ BEGIN
     SQL statements
 END;
 ```
-```sql
 
+```sql
 DELIMITER //
 
 CREATE PROCEDURE GetEmployeeDetails(IN emp_id INT)
@@ -657,7 +668,6 @@ SELECT employee_id, first_name, last_name, salary,
 FROM employees;
 ```
 
-
 Q: What are clusters in SQL?
 
 A: Clusters in SQL are used to group rows that have the same values in one or more columns. Clusters are used to organize data in a table based on the values of one or more columns. Clusters can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of rows that need to be scanned. Clusters can also improve the readability of the SQL queries by grouping related rows together.
@@ -678,7 +688,7 @@ ON employees (department_id, job_id);
 
 Q: What is partitioning in SQL?
 
-A: Partitioning in SQL is a technique used to divide a large table into smaller, more manageable parts called partitions. Partitioning can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of rows that need to be scanned. Partitioning can also improve the manageability of the database by allowing data to be stored in separate partitions based on a specified condition. There are several types of partitioning in SQL, such as range partitioning, list partitioning, hash partitioning, and composite partitioning. Partitioning can be done based on a single column or multiple columns. 
+A: Partitioning in SQL is a technique used to divide a large table into smaller, more manageable parts called partitions. Partitioning can improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of rows that need to be scanned. Partitioning can also improve the manageability of the database by allowing data to be stored in separate partitions based on a specified condition. There are several types of partitioning in SQL, such as range partitioning, list partitioning, hash partitioning, and composite partitioning. Partitioning can be done based on a single column or multiple columns.
 
 ```sql
 -- Syntax for creating a partition in SQL
@@ -725,6 +735,7 @@ Q: What is Database Denormalization and the forms of denormalization?
 A: Database denormalization is the process of optimizing a database by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database. Denormalization can speed up the retrieval of data from a table by reducing the number of rows that need to be scanned. It can also reduce the complexity of the database schema and improve the readability of the SQL queries.
 
 Forms of denormalization:
+
 1. Horizontal denormalization: Horizontal denormalization involves splitting a table into multiple tables based on rows. This is done to reduce the number of rows in a table and improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
 2. Vertical denormalization: Vertical denormalization involves splitting a table into multiple tables based on columns. This is done to reduce the number of columns in a table and improve the performance of SELECT, UPDATE, DELETE, and MERGE statements.
 3. Star schema denormalization: Star schema denormalization involves denormalizing a star schema by adding redundant data to one or more tables. This is done to improve the performance of SELECT, UPDATE, DELETE, and MERGE statements by reducing the number of joins required to retrieve data from the database.
@@ -734,6 +745,7 @@ Q: What are database Normalization and the forms of normalization?
 A: Database normalization is the process of organizing a database into tables and columns to reduce redundancy and improve data integrity. Normalization involves dividing a database into multiple tables and defining relationships between the tables. There are several normal forms in database normalization, such as First Normal Form (1NF), Second Normal Form (2NF), Third Normal Form (3NF), Boyce-Codd Normal Form (BCNF), and Fourth Normal Form (4NF).
 
 Forms of normalization:
+
 1. First Normal Form (1NF): A table is in 1NF if it has a primary key and all columns are atomic (i.e., each column contains a single value).
 2. Second Normal Form (2NF): A table is in 2NF if it is in 1NF and all non-key columns are fully functionally dependent on the primary key.
 3. Third Normal Form (3NF): A table is in 3NF if it is in 2NF and all non-key columns are transitively dependent on the primary key.
@@ -763,6 +775,7 @@ CREATE TABLE orders
     total_amount DECIMAL(10, 2)
 );
 ```
+
 Here, the total_amount column is fully functionally dependent on the primary key (order_id) because it is dependent on the order_id and not on the customer_id or order_date.
 
 ```sql
@@ -776,6 +789,7 @@ CREATE TABLE products
     category_name VARCHAR(100)
 );
 ```
+
 Here, the category_name column is transitively dependent on the primary key (product_id) through the category_id column. To normalize the table to 3NF, we can create a separate categories table with the category_id and category_name columns. 
 
 ```sql
@@ -788,6 +802,7 @@ CREATE TABLE employees
     department_name VARCHAR(100)
 );
 ```
+
 Here, the department_name column is dependent on the department_id column, which is a candidate key. To normalize the table to BCNF, we can create a separate departments table with the department_id and department_name columns.
 
 ```sql
@@ -802,7 +817,8 @@ CREATE TABLE employees
     phone_numbers VARCHAR(100)
 );
 ```
-Here, the phone_numbers column contains multi-valued dependencies because it can contain multiple phone numbers for each employee. To normalize the table to 4NF, we can create a separate phone_numbers table with the employee_id and phone_number columns. 
+
+Here, the phone_numbers column contains multi-valued dependencies because it can contain multiple phone numbers for each employee. To normalize the table to 4NF, we can create a separate phone_numbers table with the employee_id and phone_number columns.
 
 Q: What is the difference between a primary key, a unique key, Candidate key, and a foreign key?
 
@@ -827,8 +843,61 @@ FROM table_name;
 
 Q: How to use CASE statement in SQL?
 
-A: 
+A: The CASE statement in SQL is used to perform conditional logic in a query. The CASE statement evaluates a list of conditions and returns a result based on the first condition that evaluates to true. The CASE statement can be used in SELECT, INSERT, UPDATE, and DELETE statements.
+
+```sql
+
+-- Syntax for using CASE statement in SQL
+
+SELECT
+    CASE
+        WHEN condition1 THEN result1
+        WHEN condition2 THEN result2
+        ELSE default_result
+    END AS result
+FROM table_name;
+```
+
+```sql
+-- Example of using CASE statement in SQL
+
+SELECT
+    employee_id,
+    first_name,
+    last_name,
+    CASE
+        WHEN salary > 50000 THEN 'High'
+        WHEN salary > 30000 THEN 'Medium'
+        ELSE 'Low'
+    END AS salary_category
+FROM employees;
+```
 
 Q: How to connect to SQL using Python?
 
-A: 
+A: We can use SQL Alchemy to connect to SQL databases using Python. SQL Alchemy is a Python SQL toolkit and Object-Relational Mapping (ORM) library that provides a high-level interface to interact with SQL databases. SQL Alchemy supports various database engines, such as SQLite, MySQL, PostgreSQL, and Oracle.
+
+```python
+# Example of connecting to a MySQL database using SQL Alchemy in Python
+
+from sqlalchemy import create_engine
+
+# Create a connection string
+connection_string = 'mysql+pymysql://username:password@hostname:port/database_name'
+
+# Create an engine
+engine = create_engine(connection_string)
+
+# Connect to the database
+connection = engine.connect()
+
+# Perform SQL operations
+result = connection.execute('SELECT * FROM table_name')
+
+# Fetch the results
+for row in result:
+    print(row)
+
+# Close the connection
+connection.close()
+```
