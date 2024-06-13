@@ -147,3 +147,13 @@ AWS provides several data analytics and machine learning services that allow you
 - **Amazon Glue**: A data catalog and ETL (extract, transform, load) service that allows you to prepare and load data for analytics. You can use Glue to discover, catalog, and transform data from various sources and make it available for analysis.
 
 ![Data Analytics](RefImgs/DA.png)
+
+## How many types of deployment models exist in the cloud?
+
+There are three types of deployment models in the cloud:
+
+- **Public Cloud**: In a public cloud, the cloud infrastructure is owned and operated by a third-party cloud service provider. The cloud resources are shared by multiple organizations and are accessible over the internet. Public clouds offer scalability, flexibility, and cost-effectiveness. Eg. AWS, Microsoft Azure, Google Cloud Platform.
+
+- **Private Cloud**: In a private cloud, the cloud infrastructure is dedicated to a single organization. The cloud resources are isolated from other organizations and are accessible over a private network. Private clouds offer greater control, security, and customization. Eg. VMware, OpenStack.
+
+- **Hybrid Cloud**: In a hybrid cloud, the cloud infrastructure is a combination of public and private clouds. The cloud resources are distributed between the public and private clouds based on the organization's requirements. Hybrid clouds offer the benefits of both public and private clouds. Eg. AWS Outposts, Azure Stack.

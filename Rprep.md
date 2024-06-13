@@ -191,7 +191,7 @@ for (i in 1:5) {
 
 ### 6. Next statement
 
-- The next statement is used to skip the current iteration of a loop. 
+- The next statement is used to skip the current iteration of a loop.
 
 ```R
 for (i in 1:5) {
@@ -515,8 +515,8 @@ df3 <- merge(df1, df2, by = "a", all = TRUE)
 # 4 4 <NA>    F
 ```
 
-- merge() function is used to merge two data frames by common columns. The all argument is set to TRUE to perform a full join. The by argument specifies the common column to merge on. merge() function can act as an inner, left, right, or full join based on the all argument. 
-- the arguments are all, all.x, all.y, by, by.x, by.y, suffixes, and sort. 
+- merge() function is used to merge two data frames by common columns. The all argument is set to TRUE to perform a full join. The by argument specifies the common column to merge on. merge() function can act as an inner, left, right, or full join based on the all argument.
+- the arguments are all, all.x, all.y, by, by.x, by.y, suffixes, and sort.
 
 ```R
 # Regular join (inner join)
@@ -543,7 +543,7 @@ df3 <- merge(df1, df2, by = "a", sort = TRUE)
 
 ## How to chain several operations together in R?
 
-- The pipe operator `%>%` is used to chain several operations together in R. It is part of the magrittr package and is used to pass the result of one function to the next function as an argument. 
+- The pipe operator `%>%` is used to chain several operations together in R. It is part of the magrittr package and is used to pass the result of one function to the next function as an argument.
 
 ```R
 library(dplyr)
@@ -648,13 +648,12 @@ identical(x, y)
 # The identical() function checks if two objects are exactly the same, including their attributes and memory location.
 ```
 
-
 ## How to create a new column in a data frame in R based on other columns?
 
 - You can create a new column in a data frame in R based on other columns using the `$` operator, the `transform()` function, or the `mutate()` function from the `dplyr` package.
 
-
 ### transform() function
+
 ```R
 df <- data.frame(col_1 = c(1, 3, 5, 7),  col_2 = c(8, 6, 4, 2))
 print(df)
@@ -891,3 +890,132 @@ print(sum_by_group)
 - **nnet—for** -  neural networks and multinomial log-linear algorithms.
 - **tensorflow—the** -  R interface to TensorFlow, for deep neural networks and numerical computation using data flow graphs.
 - **Keras—the** -  R interface to Keras, for deep neural networks.
+
+## Difference between with and within in R?
+
+- The `with()` and `within()` functions in R are used to evaluate an expression in an environment created by a data frame. They are similar in that they allow you to refer to the columns of a data frame directly without using the `$` operator. However, there are some differences between the two functions:
+
+### with() function
+
+- The `with()` function evaluates an expression in an environment created by a data frame. It allows you to refer to the columns of the data frame directly without using the `$` operator.
+
+```R
+# Example of the with() function in R
+df <- data.frame(a = 1:3, b = c("A", "B", "C"))
+print(df)
+
+# Using the with() function to create a new column based on other columns
+df <- with(df, {
+  c <- a + 1
+  d <- b
+  return(data.frame(a, b, c, d))
+})
+print(df)
+```
+
+### within() function
+
+- The `within()` function is similar to the `with()` function but allows you to modify the data frame in place. It returns the modified data frame with the new columns added.
+
+```R
+# Example of the within() function in R
+df <- data.frame(a = 1:3, b = c("A", "B", "C"))
+print(df)
+
+# Using the within() function to create a new column based on other columns
+
+df <- within(df, {
+  c <- a + 1
+  d <- b
+})
+print(df)
+```
+
+## What is R6 class in R?
+
+- The R6 class is an object-oriented programming (OOP) system in R that allows you to create and work with classes and objects. It provides a more flexible and powerful way to define and use classes compared to the traditional S3 and S4 class systems in R.
+- The R6 class system is based on the concept of mutable objects, where objects can be modified and updated after creation. This is in contrast to the S3 and S4 class systems, which are based on immutable objects.
+- The R6 class system is designed to be more user-friendly and intuitive, with a simpler syntax and more consistent behavior. It provides a more object-oriented approach to programming in R, allowing you to define classes, create objects, and call methods on those objects.
+
+```R
+# Example of the R6 class in R
+library(R6)
+
+# Defining an R6 class
+Person <- R6Class("Person",
+                  public = list(
+                    name = NULL,
+                    age = NULL,
+                    initialize = function(name, age) {
+                      self$name <- name
+                      self$age <- age
+                    },
+                    greet = function() {
+                      cat("Hello, my name is", self$name, "and I am", self$age, "years old.\n")
+                    }
+                  ))
+
+# Creating an object of the Person class
+person <- Person$new("Alice", 30)
+
+# Calling a method on the object
+person$greet()
+# Hello, my name is Alice and I am 30 years old.
+
+# The R6 class system in R provides a more flexible and powerful way to define and work with classes and objects, making it easier to write object-oriented code in R.
+```
+
+## How to remove duplicate rows and entries from a data frame in R?
+
+- You can remove duplicate rows and entries from a data frame in R using the `unique()` function, the `duplicated()` function, and the `distinct()` function from the `dplyr` package.
+
+### unique() function
+
+- The `unique()` function is used to remove duplicate rows from a data frame. It returns a data frame with only the unique rows.
+
+```R
+# Example of the unique() function in R
+df <- data.frame(a = c(1, 2, 3, 2, 1), b = c("A", "B", "C", "B", "A"))
+print(df)
+
+# Removing duplicate rows from the data frame df
+df_unique <- unique(df)
+print(df_unique)
+```
+
+### duplicated() function
+
+- The `duplicated()` function is used to identify duplicate rows in a data frame. It returns a logical vector indicating whether each row is a duplicate of a previous row.
+
+```R
+
+# Example of the duplicated() function in R
+df <- data.frame(a = c(1, 2, 3, 2, 1), b = c("A", "B", "C", "B", "A"))
+print(df)
+
+# Identifying duplicate rows in the data frame df
+dup_rows <- duplicated(df)
+print(dup_rows)
+# [1] FALSE FALSE FALSE TRUE TRUE
+```
+
+### distinct() function
+
+- The `distinct()` function from the `dplyr` package is used to remove duplicate rows from a data frame. It returns a data frame with only the unique rows.
+
+```R
+# Example of the distinct() function in R
+library(dplyr)
+df <- data.frame(a = c(1, 2, 3, 2, 1), b = c("A", "B", "C", "B", "A"))
+print(df)
+
+# Removing duplicate rows from the data frame df
+df_unique <- distinct(df)
+print(df_unique)
+```
+
+- In summary, you can remove duplicate rows and entries from a data frame in R using the `unique()` function, the `duplicated()` function, and the `distinct()` function from the `dplyr` package.
+
+## What is R Code interpreted into?
+
+- R code is interpreted into intermediate code, which is then executed by the R interpreter. The R interpreter reads the R code, converts it into intermediate code, and then executes the intermediate code to produce the desired output.
