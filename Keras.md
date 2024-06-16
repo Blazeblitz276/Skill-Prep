@@ -49,6 +49,7 @@ results = cross_val_score(model, X, Y, cv=10)
 print(results.mean())
 
 ```
+
 ## What are callbacks in Keras?
 
 A: Callbacks in Keras are objects that can perform actions at various stages of training (e.g., at the start or end of an epoch, before or after a batch, etc.). They are useful for monitoring the training process, saving model checkpoints, early stopping, learning rate scheduling, and more. Some common callbacks in Keras include `ModelCheckpoint`, `EarlyStopping`, `ReduceLROnPlateau`, `TensorBoard`, and `CSVLogger`.
@@ -69,13 +70,16 @@ A: The `compile` method in Keras is used to configure the model for training by 
 A: There are three main ways to create Keras models: using the Sequential model API, the Functional API, or by subclassing the Model class.
 
 - Sequential model API: This is the simplest way to create a model by stacking layers in a linear fashion.
+
 ```python
 model = Sequential()
 model.add(Dense(64, activation='relu', input_shape=(784,)))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 ```
+
 - Functional API: This allows for more complex models with multiple inputs and outputs, shared layers, and branching architectures.
+
 ```python
 inputs = Input(shape=(784,))
 x = Dense(64, activation='relu')(inputs)
@@ -83,7 +87,9 @@ x = Dense(64, activation='relu')(x)
 outputs = Dense(10, activation='softmax')(x)
 model = Model(inputs=inputs, outputs=outputs)
 ```
+
 - Subclassing the Model class: This allows for complete customization of the model architecture and training loop.
+
 ```python
 class MyModel(Model):
     def __init__(self):
@@ -108,7 +114,7 @@ A: A loss function is used to measure how well the model is performing on the tr
 
 A: Data loaders in Keras are objects that are used to load and preprocess data for training and evaluation. They typically take input data and target data as input, and provide batches of data to the model during training. Some common data loaders in Keras include `ImageDataGenerator` for image data, `TextVectorization` for text data, and `TimeseriesGenerator` for time series data.
 
-##  What is K-fold cross-validation?
+## What is K-fold cross-validation?
 
 A: K-fold cross-validation is a technique used to evaluate the performance of a machine learning model by training and testing it on multiple subsets of the data. The data is divided into K subsets, or folds, and the model is trained on K-1 folds and tested on the remaining fold. This process is repeated K times, with each fold used as the test set exactly once. The final performance of the model is then calculated as the average of the performance on each fold.
 eg: 5-fold cross-validation involves dividing the data into 5 subsets, training the model on 4 subsets and testing it on the remaining subset, and repeating this process 5 times.
@@ -122,7 +128,7 @@ Some of the cross-validation methods are:
 - Hold-out K-folds: The data is divided into K subsets, or folds, and the model is trained on K-1 folds and tested on the remaining fold. This process is repeated K times, with each fold used as the test set exactly once. The final performance of the model is then calculated as the average of the performance on each fold.
 
 - Leave-one-out: Each data point is used as the test set once, with the remaining data used for training. This process is repeated for each data point, and the final performance of the model is calculated as the average of the performance on each data point.
- 
+
 - Leave-p-out: Similar to leave-one-out, but with p data points used as the test set each time.
 Stratified K-folds: Similar to K-folds, but with the data divided into folds such that each fold contains approximately the same proportion of each class.
 
@@ -141,4 +147,3 @@ A: The bias-variance tradeoff is a fundamental concept in machine learning that 
 To counteract overfitting, you can use techniques like regularization, dropout, early stopping, and data augmentation. These techniques help prevent the model from memorizing the training data and improve its generalization to unseen data.
 
 To counteract underfitting, you can use techniques like increasing the model's capacity, adding more layers or neurons, and training for more epochs. These techniques help the model learn more complex patterns in the data and improve its performance on the training set.
-
