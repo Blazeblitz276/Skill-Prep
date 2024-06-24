@@ -73,3 +73,11 @@ dag = DAG(
     schedule_interval='@daily',
 )
 ```
+
+## General procedures and best practices
+
+1. Using the `airflow` command line interface to interact with the Airflow system: `airflow <command> <subcommand>` (e.g. `airflow list_dags`, `airflow list_tasks <dag_id>`, `airflow test <dag_id> <task_id> <execution_date>`)
+2. Using the `airflow.cfg` file to configure the Airflow system: `airflow.cfg` is the main configuration file for the Airflow system. It is located in the `AIRFLOW_HOME` directory.
+3. Using the Airflow web interface to monitor and manage the Airflow system: The Airflow web interface is a graphical user interface that allows you to monitor and manage the Airflow system. You can access the web interface by navigating to `http://<hostname>:<port>` in your web browser.
+4. Using the Airflow REST API to interact with the Airflow system: The Airflow REST API is a web service that allows you to interact with the Airflow system programmatically. You can use the REST API to perform various operations such as creating, updating, and deleting DAGs, tasks, and task instances.
+
