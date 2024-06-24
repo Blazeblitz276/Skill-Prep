@@ -157,3 +157,23 @@ There are three types of deployment models in the cloud:
 - **Private Cloud**: In a private cloud, the cloud infrastructure is dedicated to a single organization. The cloud resources are isolated from other organizations and are accessible over a private network. Private clouds offer greater control, security, and customization. Eg. VMware, OpenStack.
 
 - **Hybrid Cloud**: In a hybrid cloud, the cloud infrastructure is a combination of public and private clouds. The cloud resources are distributed between the public and private clouds based on the organization's requirements. Hybrid clouds offer the benefits of both public and private clouds. Eg. AWS Outposts, Azure Stack.
+
+## Types of cloud computing services
+
+There are three types of cloud computing services:
+
+- **Infrastructure as a Service (IaaS)**: In IaaS, the cloud service provider offers virtualized computing resources over the internet. You can provision and manage virtual servers, storage, and networking resources on-demand. Eg. AWS EC2, Azure Virtual Machines, Google Compute Engine.
+
+- **Platform as a Service (PaaS)**: In PaaS, the cloud service provider offers a platform for developing, testing, and deploying applications over the internet. You can build and run applications without worrying about the underlying infrastructure. Eg. AWS Elastic Beanstalk, Azure App Service, Google App Engine.
+
+- **Software as a Service (SaaS)**: In SaaS, the cloud service provider offers software applications over the internet. You can access and use the software applications without installing or maintaining them. Eg. Salesforce, Office 365, Google Workspace.
+
+## Types of cloud computing deployment models
+
+There are three types of cloud computing deployment models:
+
+- **Public Cloud**: In a public cloud, the cloud infrastructure is owned and operated by a third-party cloud service provider. The cloud resources are shared by multiple organizations and are accessible over the internet. Public clouds offer scalability, flexibility, and cost-effectiveness. Eg. AWS, Microsoft Azure, Google Cloud Platform.
+
+- **Private Cloud**: In a private cloud, the cloud infrastructure is dedicated to a single organization. The cloud resources are isolated from other organizations and are accessible over a private network. Private clouds offer greater control, security, and customization. Eg. VMware, OpenStack.
+
+- **Hybrid Cloud**: In a hybrid cloud, the cloud infrastructure is a combination of public and private clouds. The cloud resources are distributed between the public and private clouds based on the organization's requirements. Hybrid clouds offer the benefits of both public and private clouds. Eg. AWS Outposts, Azure Stack.
